@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Update User{% endblock %}
+
+{% block content %}
+    <div class="container-fluid text-light">
+        <h1>Edit your details Here</h1><br>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Update" class="btn btn-success">
+        </form>
+
+    </div><br>
+
+{% endblock %}

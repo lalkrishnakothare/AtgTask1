@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block content %}
+    <div class="container-fluid text-light" align="center">
+        {% if search_text %}
+            <h1>Your Search Results for {{search_text}}</h1><br>
+            <table class="table table-bordered text-light">
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                </tr>
+                {% for user in users %}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+        {% else %}
+            <h1>There is no search result</h1>
+        {% endif %}
+
+    </div><br>
+
+{% endblock %}

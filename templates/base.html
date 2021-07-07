@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-dark">
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/">GoTo AdminSite</a>
+            </li>
+
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="/">Logged As : {{user.username}}</a>
+            </li>
+            <li class="nav-item">
+                <input class="btn btn-primary" type="submit" id="room-name-submit" value="Chat Room">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/logout">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="/accounts/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'chat:register' %}">Register</a>
+            </li>
+            {% endif %}
+        </ul>
+        {% if user.is_authenticated %}
+        <form class="form-inline" method="post" action="/searchuser/">
+            {% csrf_token %}
+            <input class="form-control mr-sm-1" type="text" placeholder="Search User" name="search_text">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        {% endif %}
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    <footer class="bg-dark text-light p-4" align="center">
+        <p>This web application is created by Lalkrishna Kothare for learning purpose only..</p>
+    </footer>
+</body>
+</html>

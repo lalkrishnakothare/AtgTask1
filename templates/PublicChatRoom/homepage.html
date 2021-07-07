@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+    <div class="container-fluid text-light" align="center">
+        <h1>Welcome to Homepage</h1><br>
+        <input id="room-name-input" type="text" size="100" value="publicchatroom" disabled><br>
+
+
+        <script>
+            document.querySelector('#room-name-input').focus();
+            document.querySelector('#room-name-input').onkeyup = function(e) {
+                if (e.keyCode === 13) {  // enter, return
+                    document.querySelector('#room-name-submit').click();
+                }
+            };
+
+            document.querySelector('#room-name-submit').onclick = function(e) {
+                var roomName = document.querySelector('#room-name-input').value;
+                window.location.pathname = '/chat/' + roomName + '/';
+            };
+        </script>
+        <h2 class="bg-dark">You can see your details here</h2>
+        <table class="table table-bordered text-light">
+            <tr>
+                <td align="right"><b>User ID : </b></td>
+                <td>{{user.id}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b>Username : </b></td>
+                <td>{{user.username}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b>First Name : </b></td>
+                <td>{{user.first_name}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b>Last Name : </b></td>
+                <td>{{user.last_name}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b>Email : </b></td>
+                <td>{{user.email}}</td>
+            </tr>
+            <tr>
+                <td align="right"><b>Joining Date : </b></td>
+                <td>{{user.date_joined}}</td>
+            </tr>
+        </table>
+        <a href="/updateuser/{{user.id}}" class="btn btn-primary">Edit you details</a>
+    </div><br>
+
+{% endblock %}

@@ -49,8 +49,7 @@ def searchuser(request):
         return render(request, 'registration/search.html')
 
 @login_required()
-def chatroom(request, room_name):
+def chatroom(request):
     return render(request, 'PublicChatRoom/chatroom.html', {
-        'room_name':mark_safe(json.dumps(room_name)),
         'username': mark_safe(json.dumps(request.user.username)),
     })
